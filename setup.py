@@ -1,13 +1,16 @@
 from setuptools import setup, find_packages
-desc = "The Cisco Wireless LAN Compliance Lookup library"
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name='ciscoaplookup',
-    version="0.9.0",
+    version="0.9.3",
     author="Steffen Schumacher",
     author_email="ssch@wheel.dk",
-    description=desc,
-    long_description=desc,
+    description="The Cisco Wireless LAN Compliance Lookup library",
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/steffenschumacher/ciscoaplookup.git",
     packages=find_packages(),
