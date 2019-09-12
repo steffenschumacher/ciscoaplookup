@@ -85,12 +85,11 @@ def get_models():
     return list(models)
 
 
-def get_domain_for(model, country):
+def get_domain_for(model, country=None):
     """
     Get all valid domains for a given model, in a particular country.
     :param str model:
     :param str country:
-    :param str platform:
     :return:
     """
     valid_domains = set()
@@ -112,7 +111,7 @@ def get_domain_for(model, country):
         for row_no in range(1, sheet.nrows):
             row = parse_row(row_no, h, sheet)
             if not row: continue
-            if row['Country'].lower() == country.lower():
+            if not country or row['Country'].lower() == country.lower():
                 found_country = True
                 if row[model] == 'x':
                     valid_domains.add(row['Regulatory Domain'])
@@ -123,6 +122,16 @@ def get_domain_for(model, country):
         raise ValueError('Found {} for {} - but no active regulatory domains?'.format(model, country))
     else:
         raise ValueError('Couldn\'t find any country matching {}'.format(country))
+
+
+def get_country_models(model):
+    """
+    Get all valid domain-specific models for a given model.
+    :param str model:
+    :return:
+    """
+    domains = get_domain_for(model, country=None)
+    return ['{}{}-K9'.format(model, domain) for domain in domains]
 
 
 def get_model_for(model, country):

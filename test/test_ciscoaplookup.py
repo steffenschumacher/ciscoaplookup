@@ -17,6 +17,7 @@ class TestCiscoAPLookup(TestCase):
             res = get_model_for(c[0], c[1])
             exp = c[0]+c[2]+'-K9'
             self.assertEqual(exp, res, '{} doesn\'t match {} for {} / {}'.format(res, exp, c[0], c[1]))
+        print(get_country_models('AIR-AP2802I'))
 
     def test_fail_models(self):
         self.assertRaises(ValueError, get_model_for, 'gnyf', 'Denmark')  # invalid model
