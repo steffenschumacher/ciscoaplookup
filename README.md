@@ -13,10 +13,10 @@ allows you to do just that, if you know the base model and country.
 
 ```
 >>> from ciscoaplookup import *
->>> print(get_model_for('AIR-CAP1532E', 'Ukraine'))
-AIR-CAP1532E-E-K9
+>>> print(get_models_for('AIR-CAP1532E', 'Ukraine'))
+[AIR-CAP1532E-E-K9]
 # now lets try with a model not supported for Ukraine..
->>> print(get_model_for('AIR-CAP1552H', 'Ukraine'))
+>>> print(get_models_for('AIR-CAP1552H', 'Ukraine'))
 ValueError: Found AIR-CAP1552H for Ukraine - but no active regulatory domains?
 >>> print(get_models())
 ['AIR-AP1800I', 'AIR-CAP1532I', 'AIR-AP1852', 'AIR-BLE-USB', 'AIR-AP1562D', 'AIR-AP3802E', 'AIR-OEAP1810', 

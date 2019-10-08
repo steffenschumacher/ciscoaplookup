@@ -11,18 +11,17 @@ class TestCiscoAPLookup(TestCase):
             ('AIR-AP1572IC', 'Mexico', '-A'),
             ('AIR-AP1572IC', 'New Zealand', '-Z'),
             ('AIR-CAP1532I', 'Taiwan', '-T'),
-
+            ('AIR-AP2802I', 'Denmark', '-E'),
         ]
         for c in cases:
-            res = get_model_for(c[0], c[1])
-            exp = c[0]+c[2]+'-K9'
+            res = get_models_for(c[0], c[1])
+            exp = [c[0]+c[2]+'-K9']
             self.assertEqual(exp, res, '{} doesn\'t match {} for {} / {}'.format(res, exp, c[0], c[1]))
-        print(get_country_models('AIR-AP2802I'))
 
     def test_fail_models(self):
-        self.assertRaises(ValueError, get_model_for, 'gnyf', 'Denmark')  # invalid model
-        self.assertRaises(ValueError, get_model_for, 'AIR-CAP1532I', 'Neverland')  # invalid country
-        self.assertRaises(ValueError, get_model_for, 'AIR-CAP1552H', 'Vietnam')  # not possible
+        self.assertRaises(ValueError, get_models_for, 'gnyf', 'Denmark')  # invalid model
+        self.assertRaises(ValueError, get_models_for, 'AIR-CAP1532I', 'Neverland')  # invalid country
+        self.assertRaises(ValueError, get_models_for, 'AIR-CAP1552H', 'Vietnam')  # not possible
 
     def test(self):
         self.assertTrue(len(get_models()) > 20)

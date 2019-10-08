@@ -11,7 +11,7 @@ This is all nice and fine, but in certain cases it would be neat if you could au
 given the country.
 """
 compliance_url = 'https://www.cisco.com/c/dam/assets/prod/wireless/wireless-compliance-tool/ComplianceStatus.xls'
-platforms = {'Controller-based': (1, 3), 'Standalone': (0, 1), 'Outdoor & Industrial': (1, 2), 'Universal': (0, 1)}
+platforms = {'Controller-based': (1, 3), 'Standalone': (0, 1), 'Outdoor and Industrial': (1, 2), 'Universal': (0, 1)}
 book = None
 models_by_platform = None
 
@@ -134,19 +134,19 @@ def get_country_models(model):
     return ['{}{}-K9'.format(model, domain) for domain in domains]
 
 
-def get_model_for(model, country):
+def get_models_for(model, country):
     """
     Get precise model name for a model and country
     :param str model:
     :param str country:
     :return:
-    :rtype: str
+    :rtype: list[str]
     """
 
     domains = get_domain_for(model, country)
     if not domains:
         raise ValueError('Unable to find any valid regulatory domains for {} in {}'.format(model, country))
-    return '{}{}-K9'.format(model.upper(), domains[0])
+    return ['{}{}-K9'.format(model.upper(), dom) for dom in domains]
 
 
 def get_platform_for(model):
