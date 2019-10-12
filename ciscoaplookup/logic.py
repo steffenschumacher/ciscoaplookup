@@ -11,7 +11,7 @@ This is all nice and fine, but in certain cases it would be neat if you could au
 given the country.
 """
 compliance_url = 'https://www.cisco.com/c/dam/assets/prod/wireless/wireless-compliance-tool/ComplianceStatus.xls'
-platforms = {'Controller-based': (1, 3), 'Standalone': (0, 1), 'Outdoor and Industrial': (1, 2), 'Universal': (0, 1)}
+platforms = {'Controller-based': (1, 3), 'Standalone': (0, 1), 'Outdoor & Industrial': (1, 2), 'Universal': (0, 1)}
 book = None
 models_by_platform = None
 
