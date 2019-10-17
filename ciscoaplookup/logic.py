@@ -1,6 +1,7 @@
 from xlrd import open_workbook
 from xlrd.sheet import Sheet
 from xlrd.book import Book
+from xlrd.biffh import XLRDError
 import requests
 
 """
@@ -58,7 +59,7 @@ def get_models_by_platform():
     models_by_platform = {}
     for p, indexes in platforms.items():
         models_by_platform[p] = set()
-        sheet = get_book().sheet_by_name(p)
+        sheet = get_platform_sheet(p)
         start_col = indexes[1]+1
         try:
             for col in range(start_col, 30):
@@ -85,6 +86,20 @@ def get_models():
     return list(models)
 
 
+def get_platform_sheet(platform):
+    """
+    :param str platform:
+    :rtype: Sheet
+    """
+    try:
+        sheet = get_book().sheet_by_name(platform)
+    except XLRDError as sheet_error:
+        if '&' not in platform:
+            raise sheet_error
+        sheet = get_book().sheet_by_name(platform.replace('&', 'and'))
+    return sheet
+
+
 def get_domain_for(model, country=None):
     """
     Get all valid domains for a given model, in a particular country.
@@ -95,7 +110,7 @@ def get_domain_for(model, country=None):
     valid_domains = set()
     found_country = False
     for platform in get_platform_for(model):
-        sheet = get_book().sheet_by_name(platform)
+        sheet = get_platform_sheet(platform)
         h = {'Country': platforms[platform][0], 'Regulatory Domain': platforms[platform][1]}
         for header, col in h.items():
             if header != sheet.cell(0, col).value:
