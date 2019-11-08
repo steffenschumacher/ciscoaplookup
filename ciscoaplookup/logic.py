@@ -126,7 +126,8 @@ def get_domain_for(model, country=None):
         for row_no in range(1, sheet.nrows):
             row = parse_row(row_no, h, sheet)
             if not row: continue
-            if not country or row['Country'].lower() == country.lower():
+            # this way we also match United States in United States of America
+            if not country or country.lower() in row['Country'].lower():
                 found_country = True
                 if row[model] == 'x':
                     valid_domains.add(row['Regulatory Domain'])

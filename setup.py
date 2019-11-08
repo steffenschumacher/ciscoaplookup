@@ -6,7 +6,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='ciscoaplookup',
-    version="0.9.8",
+    version="0.9.9",
     author="Steffen Schumacher",
     author_email="ssch@wheel.dk",
     description="The Cisco Wireless LAN Compliance Lookup library",
