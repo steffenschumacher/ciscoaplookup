@@ -9,6 +9,17 @@ This page is basically javascript, reading data from the spreadsheet, and then o
 This is all nice and fine, but if you need software to pick the APs to order for Uzbekistan or some place, this library 
 allows you to do just that, if you know the base model and country.
 
+### full coverage...
+So Ciscos list doesn't actually cover all countries, so to find the regulatory domain for countries
+not in ciscos tool, we also use Junipers list to find the regulatory domains for undocumented countries.
+This is semi-valid, since the domains are vendor agnostic - only cisco does not have any models for -W or World, but 
+this way its at least indicated that a country is not matched by Cisco..
+
+Junipers list is here: 
+
+https://www.juniper.net/documentation/en_US/release-independent/junos/topics/reference/specifications/access-point-ax411-country-channel-support.html
+
+
 # Usage
 
 ```

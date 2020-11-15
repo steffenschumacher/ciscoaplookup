@@ -3,6 +3,8 @@ from xlrd.sheet import Sheet
 from xlrd.book import Book
 from xlrd.biffh import XLRDError
 import requests
+from .juniper import get_domain_for as jnpr_domain_for
+from .countries import get_country_regex
 
 """
 This module reads a spreadsheet from cisco.com, which is what is houses the data being used on:
@@ -109,6 +111,9 @@ def get_domain_for(model, country=None):
     """
     valid_domains = set()
     found_country = False
+    if country:
+        cpat = get_country_regex(country)
+
     for platform in get_platform_for(model):
         sheet = get_platform_sheet(platform)
         h = {'Country': platforms[platform][0], 'Regulatory Domain': platforms[platform][1]}
@@ -127,7 +132,7 @@ def get_domain_for(model, country=None):
             row = parse_row(row_no, h, sheet)
             if not row: continue
             # this way we also match United States in United States of America
-            if not country or country.lower() in row['Country'].lower():
+            if not country or cpat.search(row['Country']):
                 found_country = True
                 if row[model] == 'x':
                     valid_domains.add(row['Regulatory Domain'])
@@ -136,6 +141,10 @@ def get_domain_for(model, country=None):
         return list(valid_domains)
     elif found_country:
         raise ValueError('Found {} for {} - but no active regulatory domains?'.format(model, country))
+    elif country:
+        rd = jnpr_domain_for(country)
+        print('Found {} from jnpr: {}'.format(country, rd))
+        return [rd]
     else:
         raise ValueError('Couldn\'t find any country matching {}'.format(country))
 

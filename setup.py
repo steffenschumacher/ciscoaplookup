@@ -6,7 +6,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='ciscoaplookup',
-    version="0.9.9",
+    version="0.10.0",
     author="Steffen Schumacher",
     author_email="ssch@wheel.dk",
     description="The Cisco Wireless LAN Compliance Lookup library",
@@ -20,7 +20,7 @@ setup(
         "Operating System :: OS Independent",
     ),
     include_package_data=True,
-    install_requires=['requests', 'xlrd'],
+    install_requires=['requests', 'xlrd', 'beautifulsoup4', 'country_converter'],
     setup_requires=[
         'pytest-runner',
     ],
