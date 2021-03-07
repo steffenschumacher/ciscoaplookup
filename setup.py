@@ -20,7 +20,7 @@ setup(
         "Operating System :: OS Independent",
     ),
     include_package_data=True,
-    install_requires=['requests', 'xlrd', 'beautifulsoup4', 'country_converter'],
+    install_requires=['requests', 'xlrd==1.2.0', 'beautifulsoup4', 'country_converter'],
     setup_requires=[
         'pytest-runner',
     ],
