@@ -2,14 +2,16 @@ import requests
 from bs4 import BeautifulSoup
 from ciscoaplookup.countries import get_country_regex
 
-compliance_url = 'https://www.juniper.net/documentation/en_US/release-independent/junos/topics/reference/' \
-                 'specifications/access-point-ax411-country-channel-support.html'
+compliance_url = (
+    "https://www.juniper.net/documentation/en_US/release-independent/junos/topics/reference/"
+    "specifications/access-point-ax411-country-channel-support.html"
+)
 
 _rd_by_cc = None
 _rd_by_cn = None
 
 
-def _init_rd_maps():
+def _init_rd_maps() -> None:
     global _rd_by_cc
     if _rd_by_cc:
         return
@@ -18,7 +20,7 @@ def _init_rd_maps():
     rd_by_cc = {}
     html = requests.get(compliance_url, allow_redirects=True).content
     parsed = BeautifulSoup(html, features="html.parser")
-    table = parsed.body.find('table', attrs={'cellspacing': '0'})
+    table = parsed.body.find("table", attrs={"cellspacing": "0"})
     for tr in table.tbody.children:
         strings = list(tr.strings)
         if len(strings) < 4:
@@ -31,8 +33,7 @@ def _init_rd_maps():
     _rd_by_cc = rd_by_cc
 
 
-
-def get_domain_for(country):
+def get_domain_for(country: str) -> str:
     """
     Get valid domain, in a particular country.
     :param str country:
@@ -46,9 +47,9 @@ def get_domain_for(country):
     for cn, rd in _rd_by_cn.items():
         if pat.search(cn):
             return rd
-    raise ValueError('Couldn\'t find any country matching {}'.format(country))
+    raise ValueError("Couldn't find any country matching {}".format(country))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     _init_rd_maps()
-    print(get_domain_for('Viet Nam'))
+    print(get_domain_for("Viet Nam"))

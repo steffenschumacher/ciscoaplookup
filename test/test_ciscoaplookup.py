@@ -5,18 +5,20 @@ from ciscoaplookup import *
 class TestCiscoAPLookup(TestCase):
     def test_positive_models(self):
         cases = [
-            ('AIR-CAP1532I', 'Belgium', '-E'),
-            ('AIR-AP1562I', 'Gibraltar', '-E'),
-            ('AIR-CAP1532I', 'Japan', '-Q'),
-            ('AIR-AP1572IC', 'Mexico', '-A'),
-            ('AIR-AP1572IC', 'New Zealand', '-Z'),
-            ('AIR-CAP1532I', 'Taiwan', '-T'),
-            ('AIR-AP2802I', 'Denmark', '-E'),
-            ('AIR-AP2802I', 'Nicaragua', '-W'),  # used when no matches are made.
+            ('AIR-CAP1532I', 'Belgium', '-E-K9'),
+            ('AIR-AP1562I', 'Gibraltar', '-E-K9'),
+            ('AIR-CAP1532I', 'Japan', '-Q-K9'),
+            ('AIR-AP1572IC', 'Mexico', '-A-K9'),
+            ('AIR-AP1572IC', 'New Zealand', '-Z-K9'),
+            ('AIR-CAP1532I', 'Taiwan', '-T-K9'),
+            ('AIR-AP2802I', 'Denmark', '-E-K9'),
+            ('AIR-AP2802I', 'Nicaragua', '-W-K9'),  # used when no matches are made.
+            ('C9136I', 'Denmark', '-E'),
+            ('C9120AXI', 'Denmark', '-E')
         ]
         for c in cases:
             res = get_models_for(c[0], c[1])
-            exp = [c[0]+c[2]+'-K9']
+            exp = [c[0]+c[2]]
             self.assertEqual(exp, res, '{} doesn\'t match {} for {} / {}'.format(res, exp, c[0], c[1]))
 
     def test_fail_models(self):

@@ -6,7 +6,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='ciscoaplookup',
-    version="0.10.0",
+    version="0.11.1",
     author="Steffen Schumacher",
     author_email="ssch@wheel.dk",
     description="The Cisco Wireless LAN Compliance Lookup library",
@@ -14,11 +14,11 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/steffenschumacher/ciscoaplookup.git",
     packages=find_packages(),
-    classifiers=(
+    classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-    ),
+    ],
     include_package_data=True,
     install_requires=['requests', 'xlrd==1.2.0', 'beautifulsoup4', 'country_converter'],
     setup_requires=[
