@@ -17,13 +17,11 @@ given the country.
 compliance_url = "https://www.cisco.com/c/dam/assets/prod/wireless/wireless-compliance-tool/ComplianceStatus.xls"
 platforms = {
     "Indoor": (1, 3),
-    "Standalone": (0, 1),
-    "Outdoor & Industrial": (1, 2),
-    "Universal": (0, 1),
+    "Outdoor and Industrial": (1, 2),
 }
 book = None
 models_by_platform = None
-model_pat = compile(r"^(AIR-|IW|C9).*", IGNORECASE)
+model_pat = compile(r"^(AIR-|IW|C[9W]).*", IGNORECASE)
 MAX_COL = 160
 
 
@@ -135,9 +133,8 @@ def get_domain_for(model: str, country=None) -> list[str]:
                         col, sheet.cell(0, col).value, header
                     )
                 )
-        for col in range(
-            platforms[platform][1] + 1, MAX_COL
-        ):  # models start just after regulatory domain column
+        # models start just after regulatory domain column
+        for col in range(platforms[platform][1] + 1, MAX_COL):
             try:
                 if sheet.cell(0, col).value.upper() == model.upper():
                     h[model] = col
