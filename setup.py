@@ -20,7 +20,12 @@ setup(
         "Operating System :: OS Independent",
     ],
     include_package_data=True,
-    install_requires=['requests', 'xlrd==1.2.0', 'beautifulsoup4', 'country_converter'],
+    install_requires=['requests',
+                      'openpyxl==3.1.2',
+                      'country_converter',
+                      "python-dotenv==1.0.0",
+                      "environs==9.5.0",
+                      ],
     setup_requires=[
         'pytest-runner',
     ],

@@ -8,3 +8,10 @@ def get_country_regex(country: str) -> Pattern:
         raise ValueError("Unknown country: {}".format(country))
 
     return compile(pat, IGNORECASE)
+
+
+def get_country_iso2(country: str) -> str:
+
+    if cn := coco.convert(names=country, to="ISO2", not_found=None):
+        return cn
+    raise ValueError("Unknown country: {}".format(country))

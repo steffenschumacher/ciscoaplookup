@@ -1,4 +1,5 @@
 from unittest import TestCase, main
+import time
 from ciscoaplookup import *
 
 
@@ -18,15 +19,17 @@ class TestCiscoAPLookup(TestCase):
 
         ]
         for c in cases:
-            res = get_models_for(c[0], c[1])
+            t1 = time.time()
+            res = CiscoAPLookup.models_for(c[0], c[1])
             exp = [c[0]+c[2]]
             self.assertEqual(exp, res, '{} doesn\'t match {} for {} / {}'.format(res, exp, c[0], c[1]))
+            print(f"Tested {c[0]} in {c[1]}: {time.time()-t1:.2f}")
 
     def test_9120(self):
         models = []
         cfgs = []
         model_id = 223
-        x = get_country_models('C9120AXE')
+        x = CiscoAPLookup.country_models('C9120AXE')
         for m in x:
             if m[-1:] in [ 'T', 'E']:
                 continue
@@ -40,12 +43,12 @@ class TestCiscoAPLookup(TestCase):
 
 
     def test_fail_models(self):
-        self.assertRaises(ValueError, get_models_for, 'gnyf', 'Denmark')  # invalid model
-        self.assertRaises(ValueError, get_models_for, 'AIR-CAP1532I', 'Neverland')  # invalid country
-        self.assertRaises(ValueError, get_models_for, 'AIR-CAP1552H', 'Vietnam')  # not possible
+        self.assertRaises(ValueError, CiscoAPLookup.models_for, 'gnyf', 'Denmark')  # invalid model
+        self.assertRaises(ValueError, CiscoAPLookup.models_for, 'AIR-CAP1532I', 'Neverland')  # invalid country
+        self.assertRaises(ValueError, CiscoAPLookup.models_for, 'AIR-CAP1552H', 'Vietnam')  # not possible
 
     def test_hest(self):
-        self.assertTrue(len(get_models()) > 20)
+        self.assertTrue(len(CiscoAPLookup.models()) > 20)
 
     def test_countries(self):
         import pycountry
@@ -53,9 +56,9 @@ class TestCiscoAPLookup(TestCase):
 
         for c in pycountry.countries:
             try:
-                klaf = get_models_for('AIR-AP2802I', c.name)
+                klaf = CiscoAPLookup.models_for('AIR-AP2802I', c.name)
             except ValueError as ve:
-                print(ve)
+                print(f"{ve}: {c.name}")
 
 
 if __name__ == '__main__':
