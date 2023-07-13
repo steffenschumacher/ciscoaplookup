@@ -30,11 +30,11 @@ ENV or .env file controls the following:
 
 ```
 >>> from ciscoaplookup import CiscoAPLookup
->>> print(CiscoAPLookup.models_for("AIR-CAP1532E", "Ukraine"))
+>>> print(CiscoAPLookup.models_for("AIR-CAP1532E", "UA"))  # Ukraine
 [AIR-CAP1532E-E-K9]
 # now lets try with a model not supported for Ukraine..
->>> print(CiscoAPLookup.models_for("AIR-CAP1552H", "Ukraine"))
-ValueError: Found AIR-CAP1552H for Ukraine - but no active regulatory domains?
+>>> print(CiscoAPLookup.models_for("AIR-CAP1552H", "UA"))  # Ukraine
+ValueError: Found AIR-CAP1552H for UA - but no active regulatory domains?
 >>> print(CiscoAPLookup.models())
 ["AIR-AP1800I", "AIR-CAP1532I", "AIR-AP1852", "AIR-BLE-USB", "AIR-AP1562D", "AIR-AP3802E", "AIR-OEAP1810", 
 "AIR-AP1815W", "AIR-CAP702W", "AIR-AP2802I", "AIR-AP2602", "AIR-CAP1552S", "AIR-AP1572EC", "AIR-AP3602", "AIR-AP1832", 
@@ -57,5 +57,4 @@ python setup.py sdist bdist_wheel
 Go nuts..
 
 # Future
-Support of ISO countries would be nice - this requires a mapping as the underlying spreadsheet 
-doesn't conform to iso :(
+Figure out how to deal with ROW and Wifi6E
