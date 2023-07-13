@@ -1,5 +1,8 @@
 # Versions
 
+## 0.13.1
+Update docs to reflect new API and restore beautifulsoup for juniper parsing
+
 ## 0.13.0
 Major overhaul:
 * ditch xlrd -> openpyxl

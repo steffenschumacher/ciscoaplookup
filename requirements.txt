@@ -3,3 +3,4 @@ country_converter
 openpyxl==3.1.2
 python-dotenv==1.0.0
 environs==9.5.0
+beautifulsoup4
