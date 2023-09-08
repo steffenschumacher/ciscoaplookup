@@ -1,5 +1,10 @@
 # Versions
 
+## 0.13.4
+Refresh checking in-memory - to avoid frequent db lookups and improve efficiency
+## 0.13.3
+Restructure how refreshes are being done
+
 ## 0.13.2
 Lax version of env modules
 ## 0.13.1
