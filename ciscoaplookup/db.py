@@ -5,7 +5,7 @@ from hashlib import md5
 from sqlite3 import connect, Connection, Date, OperationalError
 from typing import Union
 
-from spreadsheet_parsing import get_book, platforms, parse_platform_models
+from ciscoaplookup.spreadsheet_parsing import get_book, platforms, parse_platform_models
 from ciscoaplookup.config import Config
 
 

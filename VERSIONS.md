@@ -1,5 +1,8 @@
 # Versions
 
+## 0.13.5
+Fix defective import of spreadsheet_parsing from db.py
+
 ## 0.13.4
 Refresh checking in-memory - to avoid frequent db lookups and improve efficiency
 ## 0.13.3
