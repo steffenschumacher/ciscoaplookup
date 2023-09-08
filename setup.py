@@ -6,7 +6,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='ciscoaplookup',
-    version="0.13.1",
+    version="0.13.4",
     author="Steffen Schumacher",
     author_email="ssch@wheel.dk",
     description="The Cisco Wireless LAN Compliance Lookup library",
@@ -24,8 +24,8 @@ setup(
                       'beautifulsoup4',
                       'openpyxl==3.1.2',
                       'country_converter',
-                      "python-dotenv==1.0.0",
-                      "environs==9.5.0",
+                      "python-dotenv",
+                      "environs",
                       ],
     setup_requires=[
         'pytest-runner',

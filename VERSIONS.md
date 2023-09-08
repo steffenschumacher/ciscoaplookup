@@ -1,5 +1,7 @@
 # Versions
 
+## 0.13.2
+Lax version of env modules
 ## 0.13.1
 Update docs to reflect new API and restore beautifulsoup for juniper parsing
 

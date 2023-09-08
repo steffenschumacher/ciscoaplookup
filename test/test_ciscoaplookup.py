@@ -1,6 +1,8 @@
 from unittest import TestCase, main
 import time
 from ciscoaplookup import *
+from config import Config
+from db import refresh_data
 
 
 class TestCiscoAPLookup(TestCase):
@@ -41,7 +43,6 @@ class TestCiscoAPLookup(TestCase):
         print(f"insert into tbl_device_configuration(`name`, `model_id`, `mbps`, `roles_csv`, `licenses_csv`, "
               f"`categories_csv`, `active`) VALUES {', '.join(cfgs)};")
 
-
     def test_fail_models(self):
         self.assertRaises(ValueError, CiscoAPLookup.models_for, 'gnyf', 'Denmark')  # invalid model
         self.assertRaises(ValueError, CiscoAPLookup.models_for, 'AIR-CAP1532I', 'Neverland')  # invalid country
@@ -59,6 +60,13 @@ class TestCiscoAPLookup(TestCase):
                 klaf = CiscoAPLookup.models_for('AIR-AP2802I', c.name)
             except ValueError as ve:
                 print(f"{ve}: {c.name}")
+
+    def test_repeated_update(self):
+        import requests
+
+        xls_data = requests.get(Config.CISCO_XLS_URL, allow_redirects=True).content
+        refresh_data(xls_data)
+        refresh_data(xls_data)
 
 
 if __name__ == '__main__':

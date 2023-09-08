@@ -4,7 +4,7 @@ import time
 from openpyxl import load_workbook
 from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.workbook.workbook import Workbook
-from .countries import get_country_iso2
+from ciscoaplookup.countries import (get_country_iso2)
 
 platforms = {
     "Indoor": (2, 4),
