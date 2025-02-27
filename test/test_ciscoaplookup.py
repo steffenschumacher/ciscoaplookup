@@ -17,8 +17,9 @@ class TestCiscoAPLookup(TestCase):
             ('C9124AXI', 'Denmark', '-E'),
             ('C9136I', 'Denmark', '-E'),
             ('C9120AXI', 'Denmark', '-E'),
-            ('C9120AXI', 'South Africa', '-E')
-
+            ('C9120AXI', 'South Africa', '-E'),
+            ("CW9164I", "GB", "-ROW"),
+            ("CW9163E", "DK", "-E"),
         ]
         for c in cases:
             t1 = time.time()
